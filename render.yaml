@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: premium-hosting-bot
+    runtime: python
+    plan: starter        # free tier sleeps on idle, which kills polling
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_TOKEN
+        sync: false        # from @BotFather — set manually, never commit
+      - key: OWNER_ID
+        sync: false        # leave unset to auto-claim on first /start, or set your numeric Telegram ID
+      - key: BOT_BRAND
+        value: My Hosting Bot
+      - key: SUPPORT_USERNAME
+        value: "@your_support_here"
+      - key: UPDATE_CHANNEL_URL
+        value: "https://t.me/your_channel_here"
+      - key: PAY_BKASH_NUMBER
+        sync: false
+      - key: PAY_NAGAD_NUMBER
+        sync: false
+      - key: PAY_ROCKET_NUMBER
+        sync: false
+      - key: PAY_UPAY_NUMBER
+        sync: false
+      - key: PAY_BINANCE_ID
+        sync: false
+      - key: PAY_BANK_INFO
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false        # optional — DB backup so state survives redeploys
+      - key: GITHUB_REPO
+        value: yourusername/your-backup-repo
+      - key: PYTHON_VERSION
+        value: 3.11.9
